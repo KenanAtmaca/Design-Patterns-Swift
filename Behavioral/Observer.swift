@@ -3,24 +3,24 @@
 //  kenanatmaca.com
 //
 
-protocol ObserveProtocol: class {
+protocol ObserverProtocol: class {
     func update(_ value:Int)
 }
 
 
-class TestObserve {
+class TestObserver {
     
-    weak var observe:ObserveProtocol?
+    weak var observer:ObserverProtocol?
     
     var point:Int = 0 {
         willSet {
-            observe?.update(newValue)
+            observer?.update(newValue)
         }
     }
     
 }
 
-class Observe: ObserveProtocol {
+class Observer: ObserverProtocol {
     
     func update(_ value: Int) {
         if value % 2 == 0 {
@@ -32,10 +32,10 @@ class Observe: ObserveProtocol {
     
 }
 
-let observe = Observe()
+let observer = Observer()
 
-let testObs = TestObserve()
-testObs.observe = observe
+let testObs = TestObserver()
+testObs.observer = observer
 
 testObs.point += 1
 testObs.point += 1
